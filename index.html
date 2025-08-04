@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Seawheel Component ID Generator - Private & Public sw?:// URIs</title>
+<title>Seawheel Component ID Generator </title>
 <style>
   /* Stil sadeleştirilmiş, yukarıdaki stil kullanılabilir */
   body {
@@ -155,14 +155,21 @@
     return [...new Uint8Array(buffer)].map(b => b.toString(16).padStart(2, '0')).join('');
   }
 
-  function pemToArrayBuffer(pem) {
-    const b64 = pem.replace(/-----.*?-----/g, '').replace(/\s+/g, '');
-    const binaryString = atob(b64);
-    const len = binaryString.length;
-    const bytes = new Uint8Array(len);
-    for (let i = 0; i < len; i++) bytes[i] = binaryString.charCodeAt(i);
-    return bytes.buffer;
-  }
+ function pemToArrayBuffer(pem) {
+  let b64 = pem.replace(/-----.*?-----/g, '').replace(/\s+/g, '');
+  
+
+  b64 = b64.replace(/-/g, '+').replace(/_/g, '/');
+
+  while (b64.length % 4) b64 += '=';
+  
+  const binaryString = atob(b64);
+  const len = binaryString.length;
+  const bytes = new Uint8Array(len);
+  for (let i = 0; i < len; i++) bytes[i] = binaryString.charCodeAt(i);
+  return bytes.buffer;
+}
+
 
   async function sha256(message) {
     const msgBuffer = new TextEncoder().encode(message);
