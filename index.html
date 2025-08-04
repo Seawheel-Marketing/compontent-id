@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Seawheel Component ID Generator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    /* Reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: linear-gradient(135deg, #222633, #2a2d4d);
+      font-family: 'Inter', sans-serif;
+      color: #e0e0e0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .container {
+      background: #2c2f4a;
+      max-width: 700px;
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 12px 24px rgba(50, 60, 90, 0.7);
+      padding: 30px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    h1 {
+      font-weight: 700;
+      font-size: 2.2rem;
+      color: #6aac8f;
+      margin-bottom: 10px;
+      text-align: center;
+      text-shadow: 0 0 5px #6aac8f88;
+    }
+    label {
+      font-weight: 600;
+      margin-bottom: 6px;
+      display: block;
+      color: #a2cca3;
+      text-shadow: 0 0 2px #00000066;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: none;
+      font-size: 1rem;
+      background: #39425c;
+      color: #e0e0e0;
+      box-shadow: inset 0 2px 5px #1c2132;
+      transition: background-color 0.3s ease;
+    }
+    input[type="text"]:focus {
+      background: #4a5a7d;
+      outline: none;
+      box-shadow: 0 0 8px #6aac8faa;
+    }
+    button {
+      background: linear-gradient(135deg, #6aac8f, #4e9f77);
+      border: none;
+      color: white;
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 14px 20px;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 6px 12px rgba(106, 172, 143, 0.5);
+    }
+    button:hover {
+      background: linear-gradient(135deg, #5ea67b, #3d7e5c);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(106, 172, 143, 0.7);
+    }
+    button:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 8px rgba(106, 172, 143, 0.4);
+    }
+    .result-group {
+      background: #39425c;
+      padding: 16px 20px;
+      border-radius: 16px;
+      box-shadow: inset 0 2px 6px #1c2132;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.9rem;
+      max-height: 140px;
+      overflow-y: auto;
+      color: #c7f0d9;
+      user-select: text;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .result-label {
+      font-weight: 600;
+      color: #a2cca3;
+      margin-bottom: 6px;
+      text-shadow: 0 0 2px #00000099;
+    }
+  </style>
+</head>
+<body>
+  <main class="container" role="main" aria-label="Seawheel Component ID Generator">
+    <h1>Seawheel Component ID Generator</h1>
+
+    <div>
+      <label for="inputData">Component Data (e.g. example)</label>
+      <input id="inputData" type="text" placeholder="Enter component data" autocomplete="off" />
+    </div>
+
+    <button id="generateBtn" type="button" aria-live="polite" aria-atomic="true">Generate Component ID</button>
+
+    <section aria-live="polite" aria-atomic="true" style="margin-top: 10px;">
+      <div>
+        <div class="result-label">SHA-256 Hash (hex):</div>
+        <pre id="hashOutput" class="result-group" tabindex="0"></pre>
+      </div>
+      <div>
+        <div class="result-label">Private Key (PEM format):</div>
+        <pre id="privateKeyOutput" class="result-group" tabindex="0"></pre>
+      </div>
+      <div>
+        <div class="result-label">Public Key (PEM format):</div>
+        <pre id="publicKeyOutput" class="result-group" tabindex="0"></pre>
+      </div>
+      <div>
+        <div class="result-label">Signature (base64url):</div>
+        <pre id="signatureOutput" class="result-group" tabindex="0"></pre>
+      </div>
+      <div>
+        <div class="result-label">Verification Result:</div>
+        <pre id="verifyResult" class="result-group" tabindex="0"></pre>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Convert ArrayBuffer to base64url
+    function toBase64Url(buffer) {
+      return btoa(String.fromCharCode(...new Uint8Array(buffer)))
+        .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    }
+
+    // Convert ArrayBuffer to hex string
+    function bufferToHex(buffer) {
+      return [...new Uint8Array(buffer)].map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    async function sha256(message) {
+      const msgBuffer = new TextEncoder().encode(message);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+      return hashBuffer;
+    }
+
+    async function generateKeyPair() {
+      return await crypto.subtle.generateKey(
+        {
+          name: "ECDSA",
+          namedCurve: "P-256"
+        },
+        true,
+        ["sign", "verify"]
+      );
+    }
+
+    async function exportKeyPEM(key, type) {
+      const exported = await crypto.subtle.exportKey(
+        type === "public" ? "spki" : "pkcs8",
+        key
+      );
+      const b64 = toBase64Url(exported);
+      const header = type === "public" ? "PUBLIC KEY" : "PRIVATE KEY";
+      return `-----BEGIN ${header}-----\n${b64.match(/.{1,64}/g).join('\n')}\n-----END ${header}-----`;
+    }
+
+    async function signData(privateKey, dataBuffer) {
+      return await crypto.subtle.sign(
+        {
+          name: "ECDSA",
+          hash: { name: "SHA-256" }
+        },
+        privateKey,
+        dataBuffer
+      );
+    }
+
+    async function verifySignature(publicKey, dataBuffer, signatureBuffer) {
+      return await crypto.subtle.verify(
+        {
+          name: "ECDSA",
+          hash: { name: "SHA-256" }
+        },
+        publicKey,
+        signatureBuffer,
+        dataBuffer
+      );
+    }
+
+    document.getElementById("generateBtn").addEventListener("click", async () => {
+      const inputData = document.getElementById("inputData").value.trim();
+      if (!inputData) {
+        alert("Please enter component data.");
+        return;
+      }
+
+      const hashBuffer = await sha256(inputData);
+      const hashHex = bufferToHex(hashBuffer);
+      document.getElementById("hashOutput").textContent = hashHex;
+
+      const keyPair = await generateKeyPair();
+      const privateKeyPEM = await exportKeyPEM(keyPair.privateKey, "private");
+      const publicKeyPEM = await exportKeyPEM(keyPair.publicKey, "public");
+      document.getElementById("privateKeyOutput").textContent = privateKeyPEM;
+      document.getElementById("publicKeyOutput").textContent = publicKeyPEM;
+
+      const signatureBuffer = await signData(keyPair.privateKey, hashBuffer);
+      const signatureBase64Url = toBase64Url(signatureBuffer);
+      document.getElementById("signatureOutput").textContent = signatureBase64Url;
+
+      const isValid = await verifySignature(keyPair.publicKey, hashBuffer, signatureBuffer);
+      document.getElementById("verifyResult").textContent = isValid ? "✅ Valid signature" : "❌ Invalid signature";
+    });
+  </script>
+</body>
+</html>
