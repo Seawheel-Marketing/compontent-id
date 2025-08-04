@@ -1,106 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Seawheel Component ID Generator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-  <style>
-    /* (Önceki stil aynen kalabilir, kısalttım buraya) */
-    body {
-      background: linear-gradient(135deg, #222633, #2a2d4d);
-      font-family: 'Inter', sans-serif;
-      color: #e0e0e0;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-    .container {
-      background: #2c2f4a;
-      max-width: 700px;
-      width: 100%;
-      border-radius: 16px;
-      box-shadow: 0 12px 24px rgba(50, 60, 90, 0.7);
-      padding: 30px 40px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-    h1 {
-      font-weight: 700;
-      font-size: 2.2rem;
-      color: #6aac8f;
-      margin-bottom: 10px;
-      text-align: center;
-      text-shadow: 0 0 5px #6aac8f88;
-    }
-    label {
-      font-weight: 600;
-      margin-bottom: 6px;
-      display: block;
-      color: #a2cca3;
-      text-shadow: 0 0 2px #00000066;
-    }
-    input, textarea {
-      width: 100%;
-      padding: 14px 16px;
-      border-radius: 12px;
-      border: none;
-      font-size: 1rem;
-      background: #39425c;
-      color: #e0e0e0;
-      box-shadow: inset 0 2px 5px #1c2132;
-      transition: background-color 0.3s ease;
-      font-family: monospace;
-    }
-    input:focus, textarea:focus {
-      background: #4a5a7d;
-      outline: none;
-      box-shadow: 0 0 8px #6aac8faa;
-    }
-    button {
-      background: linear-gradient(135deg, #6aac8f, #4e9f77);
-      border: none;
-      color: white;
-      font-weight: 700;
-      font-size: 1.1rem;
-      padding: 14px 20px;
-      border-radius: 16px;
-      cursor: pointer;
-      transition: background 0.3s ease, transform 0.2s ease;
-      box-shadow: 0 6px 12px rgba(106, 172, 143, 0.5);
-    }
-    button:hover {
-      background: linear-gradient(135deg, #5ea67b, #3d7e5c);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 16px rgba(106, 172, 143, 0.7);
-    }
-    button:active {
-      transform: translateY(0);
-      box-shadow: 0 4px 8px rgba(106, 172, 143, 0.4);
-    }
-    .result-group {
-      background: #39425c;
-      padding: 16px 20px;
-      border-radius: 16px;
-      box-shadow: inset 0 2px 6px #1c2132;
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 0.9rem;
-      max-height: 140px;
-      overflow-y: auto;
-      color: #c7f0d9;
-      user-select: text;
-      white-space: pre-wrap;
-      word-break: break-word;
-    }
-    .result-label {
-      font-weight: 600;
-      color: #a2cca3;
-      margin-bottom: 6px;
-      text-shadow: 0 0 2px #00000099;
-    }
-  </style>
+<meta charset="UTF-8" />
+<title>Seawheel Component ID Generator - Private & Public sw?:// URIs</title>
+<style>
+  /* Stil sadeleştirilmiş, yukarıdaki stil kullanılabilir */
+  body {
+    background: linear-gradient(135deg, #222633, #2a2d4d);
+    font-family: 'Inter', sans-serif;
+    color: #e0e0e0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  .container {
+    background: #2c2f4a;
+    max-width: 700px;
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 12px 24px rgba(50, 60, 90, 0.7);
+    padding: 30px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: block;
+    color: #a2cca3;
+    text-shadow: 0 0 2px #00000066;
+  }
+  input, textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: none;
+    font-size: 1rem;
+    background: #39425c;
+    color: #e0e0e0;
+    box-shadow: inset 0 2px 5px #1c2132;
+    transition: background-color 0.3s ease;
+    font-family: monospace;
+  }
+  button {
+    background: linear-gradient(135deg, #6aac8f, #4e9f77);
+    border: none;
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 14px 20px;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 6px 12px rgba(106, 172, 143, 0.5);
+  }
+  button:hover {
+    background: linear-gradient(135deg, #5ea67b, #3d7e5c);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(106, 172, 143, 0.7);
+  }
+  button:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 8px rgba(106, 172, 143, 0.4);
+  }
+  .result-group {
+    background: #39425c;
+    padding: 16px 20px;
+    border-radius: 16px;
+    box-shadow: inset 0 2px 6px #1c2132;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+    max-height: 140px;
+    overflow-y: auto;
+    color: #c7f0d9;
+    user-select: text;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .result-label {
+    font-weight: 600;
+    color: #a2cca3;
+    margin-bottom: 6px;
+    text-shadow: 0 0 2px #00000099;
+  }
+</style>
 </head>
 <body>
   <main class="container" role="main" aria-label="Seawheel Component ID Generator">
@@ -140,216 +126,192 @@
         <pre id="verifyResult" class="result-group" tabindex="0"></pre>
       </div>
       <div>
-        <div class="result-label">Seawheel Component ID (sw://...):</div>
-        <pre id="swOutput" class="result-group" tabindex="0"></pre>
+        <div class="result-label">Seawheel Private Component ID (sw?://private):</div>
+        <pre id="swPrivateOutput" class="result-group" tabindex="0"></pre>
+      </div>
+      <div>
+        <div class="result-label">Seawheel Public Component ID (sw?://public):</div>
+        <pre id="swPublicOutput" class="result-group" tabindex="0"></pre>
       </div>
     </section>
   </main>
 
-  <script>
-    // Base64URL encode
-    function toBase64Url(buffer) {
-      return btoa(String.fromCharCode(...new Uint8Array(buffer)))
-        .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+<script>
+  function toBase64Url(buffer) {
+    return btoa(String.fromCharCode(...new Uint8Array(buffer)))
+      .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  }
+
+  function fromBase64Url(base64url) {
+    base64url = base64url.replace(/-/g, '+').replace(/_/g, '/');
+    while (base64url.length % 4) base64url += '=';
+    const str = atob(base64url);
+    const buffer = new Uint8Array(str.length);
+    for (let i = 0; i < str.length; i++) buffer[i] = str.charCodeAt(i);
+    return buffer.buffer;
+  }
+
+  function bufferToHex(buffer) {
+    return [...new Uint8Array(buffer)].map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+
+  function pemToArrayBuffer(pem) {
+    const b64 = pem.replace(/-----.*?-----/g, '').replace(/\s+/g, '');
+    const binaryString = atob(b64);
+    const len = binaryString.length;
+    const bytes = new Uint8Array(len);
+    for (let i = 0; i < len; i++) bytes[i] = binaryString.charCodeAt(i);
+    return bytes.buffer;
+  }
+
+  async function sha256(message) {
+    const msgBuffer = new TextEncoder().encode(message);
+    return await crypto.subtle.digest('SHA-256', msgBuffer);
+  }
+
+  async function importPrivateKey(pem) {
+    const der = pemToArrayBuffer(pem);
+    return await crypto.subtle.importKey(
+      "pkcs8",
+      der,
+      { name: "ECDSA", namedCurve: "P-256" },
+      true,
+      ["sign"]
+    );
+  }
+
+  async function exportPublicKey(privateKey) {
+    const jwkPriv = await crypto.subtle.exportKey("jwk", privateKey);
+    const jwkPub = {
+      kty: jwkPriv.kty,
+      crv: jwkPriv.crv,
+      x: jwkPriv.x,
+      y: jwkPriv.y,
+      ext: true,
+    };
+    return await crypto.subtle.importKey(
+      "jwk",
+      jwkPub,
+      { name: "ECDSA", namedCurve: "P-256" },
+      true,
+      ["verify"]
+    );
+  }
+
+  async function exportKeyPEM(key, type) {
+    const exported = await crypto.subtle.exportKey(
+      type === "public" ? "spki" : "pkcs8",
+      key
+    );
+    const b64 = toBase64Url(exported);
+    const header = type === "public" ? "PUBLIC KEY" : "PRIVATE KEY";
+    return `-----BEGIN ${header}-----\n${b64.match(/.{1,64}/g).join('\n')}\n-----END ${header}-----`;
+  }
+
+  async function generateKeyPair() {
+    return await crypto.subtle.generateKey(
+      {
+        name: "ECDSA",
+        namedCurve: "P-256"
+      },
+      true,
+      ["sign", "verify"]
+    );
+  }
+
+  async function signData(privateKey, dataBuffer) {
+    return await crypto.subtle.sign(
+      {
+        name: "ECDSA",
+        hash: { name: "SHA-256" }
+      },
+      privateKey,
+      dataBuffer
+    );
+  }
+
+  async function verifySignature(publicKey, dataBuffer, signatureBuffer) {
+    return await crypto.subtle.verify(
+      {
+        name: "ECDSA",
+        hash: { name: "SHA-256" }
+      },
+      publicKey,
+      signatureBuffer,
+      dataBuffer
+    );
+  }
+
+  function concatArrayBuffers(...buffers) {
+    let totalLength = 0;
+    for (const buf of buffers) totalLength += buf.byteLength;
+    const temp = new Uint8Array(totalLength);
+    let offset = 0;
+    for (const buf of buffers) {
+      temp.set(new Uint8Array(buf), offset);
+      offset += buf.byteLength;
+    }
+    return temp.buffer;
+  }
+
+  document.getElementById("generateBtn").addEventListener("click", async () => {
+    const inputData = document.getElementById("inputData").value.trim();
+    const inputPrivPem = document.getElementById("inputPrivateKey").value.trim();
+
+    if (!inputData) {
+      alert("Please enter component data.");
+      return;
     }
 
-    // Base64URL decode to ArrayBuffer
-    function fromBase64Url(base64url) {
-      base64url = base64url.replace(/-/g, '+').replace(/_/g, '/');
-      // Pad base64 string to multiple of 4
-      while (base64url.length % 4) base64url += '=';
-      const str = atob(base64url);
-      const buffer = new Uint8Array(str.length);
-      for (let i = 0; i < str.length; i++) buffer[i] = str.charCodeAt(i);
-      return buffer.buffer;
-    }
+    try {
+      // 1. Hash
+      const hashBuffer = await sha256(inputData);
+      const hashHex = bufferToHex(hashBuffer);
+      document.getElementById("hashOutput").textContent = hashHex;
 
-    // Convert ArrayBuffer to hex string
-    function bufferToHex(buffer) {
-      return [...new Uint8Array(buffer)].map(b => b.toString(16).padStart(2, '0')).join('');
-    }
+      let privateKey, publicKey, privateKeyPEM, publicKeyPEM;
 
-    // Convert PEM to ArrayBuffer (der)
-    function pemToArrayBuffer(pem) {
-      const b64 = pem.replace(/-----.*?-----/g, '').replace(/\s+/g, '');
-      const binaryString = atob(b64);
-      const len = binaryString.length;
-      const bytes = new Uint8Array(len);
-      for (let i = 0; i < len; i++) bytes[i] = binaryString.charCodeAt(i);
-      return bytes.buffer;
-    }
-
-    // Convert ArrayBuffer to PEM string
-    function arrayBufferToPem(buffer, type) {
-      const b64 = toBase64Url(buffer);
-      const header = type === "public" ? "PUBLIC KEY" : "PRIVATE KEY";
-      return `-----BEGIN ${header}-----\n${b64.match(/.{1,64}/g).join('\n')}\n-----END ${header}-----`;
-    }
-
-    // SHA-256 hash
-    async function sha256(message) {
-      const msgBuffer = new TextEncoder().encode(message);
-      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-      return hashBuffer;
-    }
-
-    // Import private key PEM to CryptoKey
-    async function importPrivateKey(pem) {
-      try {
-        const der = pemToArrayBuffer(pem);
-        return await crypto.subtle.importKey(
-          "pkcs8",
-          der,
-          { name: "ECDSA", namedCurve: "P-256" },
-          true,
-          ["sign"]
-        );
-      } catch (e) {
-        throw new Error("Invalid Private Key PEM format.");
+      if (inputPrivPem) {
+        privateKey = await importPrivateKey(inputPrivPem);
+        publicKey = await exportPublicKey(privateKey);
+        privateKeyPEM = inputPrivPem;
+        publicKeyPEM = await exportKeyPEM(publicKey, "public");
+      } else {
+        const keyPair = await generateKeyPair();
+        privateKey = keyPair.privateKey;
+        publicKey = keyPair.publicKey;
+        privateKeyPEM = await exportKeyPEM(privateKey, "private");
+        publicKeyPEM = await exportKeyPEM(publicKey, "public");
       }
+
+      document.getElementById("privateKeyOutput").textContent = privateKeyPEM;
+      document.getElementById("publicKeyOutput").textContent = publicKeyPEM;
+
+      // 2. Sign
+      const signatureBuffer = await signData(privateKey, hashBuffer);
+      const signatureB64u = toBase64Url(signatureBuffer);
+      document.getElementById("signatureOutput").textContent = signatureB64u;
+
+      // 3. Verify
+      const isValid = await verifySignature(publicKey, hashBuffer, signatureBuffer);
+      document.getElementById("verifyResult").textContent = isValid ? "✅ Valid signature" : "❌ Invalid signature";
+
+      // 4. sw?://private - privateKey + signature + hash
+      const privDer = pemToArrayBuffer(privateKeyPEM);
+      const swPrivateBuf = concatArrayBuffers(privDer, signatureBuffer, hashBuffer);
+      const swPrivateB64u = toBase64Url(swPrivateBuf);
+      document.getElementById("swPrivateOutput").textContent = `sw?://private:${swPrivateB64u}`;
+
+      // 5. sw?://public - publicKey + hash
+      const pubDer = pemToArrayBuffer(publicKeyPEM);
+      const swPublicBuf = concatArrayBuffers(pubDer, hashBuffer);
+      const swPublicB64u = toBase64Url(swPublicBuf);
+      document.getElementById("swPublicOutput").textContent = `sw?://public:${swPublicB64u}`;
+
+    } catch (e) {
+      alert("Error: " + e.message);
     }
-
-    // Import public key PEM to CryptoKey
-    async function importPublicKey(pem) {
-      try {
-        const der = pemToArrayBuffer(pem);
-        return await crypto.subtle.importKey(
-          "spki",
-          der,
-          { name: "ECDSA", namedCurve: "P-256" },
-          true,
-          ["verify"]
-        );
-      } catch (e) {
-        throw new Error("Invalid Public Key PEM format.");
-      }
-    }
-
-    // Export CryptoKey to PEM string
-    async function exportKeyPEM(key, type) {
-      const exported = await crypto.subtle.exportKey(
-        type === "public" ? "spki" : "pkcs8",
-        key
-      );
-      return arrayBufferToPem(exported, type);
-    }
-
-    // Generate new key pair
-    async function generateKeyPair() {
-      return await crypto.subtle.generateKey(
-        {
-          name: "ECDSA",
-          namedCurve: "P-256"
-        },
-        true,
-        ["sign", "verify"]
-      );
-    }
-
-    // Sign data with private key (data is ArrayBuffer)
-    async function signData(privateKey, dataBuffer) {
-      return await crypto.subtle.sign(
-        {
-          name: "ECDSA",
-          hash: { name: "SHA-256" }
-        },
-        privateKey,
-        dataBuffer
-      );
-    }
-
-    // Verify signature
-    async function verifySignature(publicKey, dataBuffer, signatureBuffer) {
-      return await crypto.subtle.verify(
-        {
-          name: "ECDSA",
-          hash: { name: "SHA-256" }
-        },
-        publicKey,
-        signatureBuffer,
-        dataBuffer
-      );
-    }
-
-    // Build simplified ACS-like payload (concat base64url strings with dots)
-    // In real ACS, karmaşık, şifreli yapı olur.
-    function buildSeawheelID(hashHex, publicKeyPEM, signatureB64u) {
-      // Basitleştirme: publicKeyPEM base64url'e çevir, PEM header/footersiz
-      const pubB64u = publicKeyPEM
-        .replace(/-----.*?-----/g, '')
-        .replace(/\s+/g, '')
-        .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-      return `sw://${hashHex}.${pubB64u}.${signatureB64u}`;
-    }
-
-    document.getElementById("generateBtn").addEventListener("click", async () => {
-      const inputData = document.getElementById("inputData").value.trim();
-      const inputPrivPem = document.getElementById("inputPrivateKey").value.trim();
-
-      if (!inputData) {
-        alert("Please enter component data.");
-        return;
-      }
-
-      try {
-        // 1. SHA-256 Hash
-        const hashBuffer = await sha256(inputData);
-        const hashHex = bufferToHex(hashBuffer);
-        document.getElementById("hashOutput").textContent = hashHex;
-
-        let privateKey, publicKey, privateKeyPEM, publicKeyPEM;
-
-        if (inputPrivPem) {
-          // Import private key from PEM
-          privateKey = await importPrivateKey(inputPrivPem);
-          // Derive public key
-          const jwkPriv = await crypto.subtle.exportKey("jwk", privateKey);
-          // Create public JWK
-          const jwkPub = {
-            kty: jwkPriv.kty,
-            crv: jwkPriv.crv,
-            x: jwkPriv.x,
-            y: jwkPriv.y,
-            ext: true,
-          };
-          publicKey = await crypto.subtle.importKey(
-            "jwk",
-            jwkPub,
-            { name: "ECDSA", namedCurve: "P-256" },
-            true,
-            ["verify"]
-          );
-          privateKeyPEM = inputPrivPem;
-          publicKeyPEM = await exportKeyPEM(publicKey, "public");
-        } else {
-          // Generate new key pair
-          const keyPair = await generateKeyPair();
-          privateKey = keyPair.privateKey;
-          publicKey = keyPair.publicKey;
-          privateKeyPEM = await exportKeyPEM(privateKey, "private");
-          publicKeyPEM = await exportKeyPEM(publicKey, "public");
-        }
-
-        document.getElementById("privateKeyOutput").textContent = privateKeyPEM;
-        document.getElementById("publicKeyOutput").textContent = publicKeyPEM;
-
-        // 2. Sign the hash
-        const signatureBuffer = await signData(privateKey, hashBuffer);
-        const signatureB64u = toBase64Url(signatureBuffer);
-        document.getElementById("signatureOutput").textContent = signatureB64u;
-
-        // 3. Verify
-        const isValid = await verifySignature(publicKey, hashBuffer, signatureBuffer);
-        document.getElementById("verifyResult").textContent = isValid ? "✅ Valid signature" : "❌ Invalid signature";
-
-        // 4. Build sw:// ID
-        const swID = buildSeawheelID(hashHex, publicKeyPEM, signatureB64u);
-        document.getElementById("swOutput").textContent = swID;
-
-      } catch (e) {
-        alert("Error: " + e.message);
-      }
-    });
-  </script>
+  });
+</script>
 </body>
 </html>
